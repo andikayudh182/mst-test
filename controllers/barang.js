@@ -30,14 +30,18 @@ module.exports = {
     },
 
     async addBarang(req, res) {
-        const data = req.body
+
         const options = {
             fields:['kode','nama','harga'],
             returning:true
         }
 
         try {
-            const barang = await Barang.create(data,options)
+            const barang = await Barang.create({
+                kode: req.body.kode,
+                nama: req.body.nama,
+                harga: req.body.harga
+            },options)
             
             if (barang) {
                 return res.status(200).send({
