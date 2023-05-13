@@ -1,4 +1,4 @@
-const Barang = require('../models').Barang
+const Barang = require('../models').barang
 
 module.exports = {
     async getAllBarang(req, res) {
@@ -14,7 +14,7 @@ module.exports = {
             
             if (barang.length == 0) {
                 return res.status(400).send({
-                    message:'Data mahasiswa tidak ada'
+                    message:'Data barang tidak ada'
                 })
             }
 
