@@ -6,7 +6,10 @@ const List = require('../models/List');
 router.get('/', async (req, res) => {
   try {
     const list = await List.findAll()
-    res.send(list)
+    res.status(200).send({
+      message:'success',
+      data:list
+    })
   } catch(e){
     res.send
   }
