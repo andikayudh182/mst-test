@@ -28,7 +28,13 @@ app.get('/', (req, res) => res.send('running...'));
 
 app.use('/list', require('./routes/list'));
 app.use(cors());
-app.options("*", cors());
+const corsOptions = {
+  origin: 'http://localhost:8080',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+app.use(cors(corsOptions));
+// app.options("*", cors());
 app.use(allowCrossDomain);
 
 const PORT = process.env.PORT || 5000;
