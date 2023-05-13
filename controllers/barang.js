@@ -31,29 +31,61 @@ module.exports = {
 
     async addBarang(req, res) {
 
+        const data = req.body;
+
+        // pastikan bahwa objek `data` tidak kosong
+        if (!data) {
+          return res.status(400).send({
+            message: 'Data barang tidak ditemukan.',
+          });
+        }
+      
+        // pastikan bahwa properti `kode` ada pada objek `data`
+        if (!data.kode) {
+          return res.status(400).send({
+            message: 'Kode barang harus diisi.',
+          });
+        }
+      
+        // pastikan bahwa properti `nama` ada pada objek `data`
+        if (!data.nama) {
+          return res.status(400).send({
+            message: 'Nama barang harus diisi.',
+          });
+        }
+      
+        // pastikan bahwa properti `harga` ada pada objek `data`
+        if (!data.harga) {
+          return res.status(400).send({
+            message: 'Harga barang harus diisi.',
+          });
+        }
+      
         const options = {
-            returning:true
-        }
-
+          fields: ['kode', 'nama', 'harga'],
+          returning: true,
+        };
+      
         try {
-            const barang = await Barang.create({
-                kode: req.body.kode,
-                nama: req.body.nama,
-                harga: req.body.harga
-            },options)
-            
-            if (barang) {
-                return res.status(200).send({
-                    message:'add barang berhasil',
-                    data: barang
-                })
-            }
+          const barang = await Barang.create(
+            {
+              kode: data.kode,
+              nama: data.nama,
+              harga: data.harga,
+            },
+            options
+          );
+      
+          if (barang) {
+            return res.status(200).send({
+              message: 'Add barang berhasil',
+              data: barang,
+            });
+          }
         } catch (error) {
-            return res.status(400).send({
-                message:error.message
-            })
+          return res.status(400).send({
+            message: error.message,
+          });
         }
-        
-
     }
 }
