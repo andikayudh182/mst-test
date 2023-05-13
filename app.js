@@ -28,10 +28,13 @@ const app = express();
 // app.get('/', (req, res) => res.send('running...'));
 
 // app.use('/list', require('./routes/list'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.options("*", cors());
 app.use(allowCrossDomain);
 app.use('/', indexRouter);
+
 
 const PORT = process.env.PORT || 5000;
 
