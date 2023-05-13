@@ -12,20 +12,21 @@ db.authenticate()
   .catch(err => console.log('error')) 
 
 const app = express();
+const host = process.env.HOST || '0.0.0.0';
+const port = process.env.PORT || 5000;
 
-app.get('/', (req, res) => res.send('running...'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// CORS Anywhere setup
+cors_proxy.createServer({
+    originWhitelist: [], // Allow all origins
+    requireHeader: ['origin', 'x-requested-with'],
+    removeHeaders: ['cookie', 'cookie2']
+}).listen(port);
+
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.use('/list', require('./routes/list'));
 
-// Activate CORS proxy using cors-anywhere
-cors_proxy.createServer({
-  originWhitelist: [], // Allow all origins
-  requireHeader: ['origin', 'x-requested-with'],
-  removeHeaders: ['cookie', 'cookie2']
-}).listen(process.env.PORT || 8080, () => {
-  console.log(`CORS proxy running on port ${process.env.PORT || 8080}`);
-});
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, console.log(`app running on port ${PORT}`));
+app.listen(port, host, () => console.log(`app running on ${host}:${port}`));
