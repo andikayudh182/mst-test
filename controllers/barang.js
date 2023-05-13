@@ -32,7 +32,6 @@ module.exports = {
     async addBarang(req, res) {
 
         const options = {
-            fields:['kode','nama','harga'],
             returning:true
         }
 
