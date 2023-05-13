@@ -28,6 +28,7 @@
 
 const Sequelize = require('sequelize');
 const db = require('../config/db.config.js');
+const dbpg = require('../db/index')
 
 const Barang = db.define('m_barang', {
   kode: {
