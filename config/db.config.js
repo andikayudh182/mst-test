@@ -7,7 +7,7 @@ const {
   DB_NAME,
   DB_PASSWORD,
   DB_USER,
-  DB_URI
+  DATABASE_URL
 } = process.env
 
 // connect to db locally
@@ -26,7 +26,7 @@ const {
 })*/
 
 // connect to remote db
-const db = new Sequelize(DB_URI, {
+const db = new Sequelize(DATABASE_URL, {
   define: {
     timestamps: false
   }
