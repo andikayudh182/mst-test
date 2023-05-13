@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const list = await List.findAll()
     res.send(list)
   } catch(e){
-    console.log(e)
+    res.send(e)
   }
 })
 

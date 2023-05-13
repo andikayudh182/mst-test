@@ -4,6 +4,8 @@ const path = require('path');
 const dotenv = require('dotenv');
 const db = require('./config/db.config.js');
 
+
+
 dotenv.config();
 
 db.authenticate()
