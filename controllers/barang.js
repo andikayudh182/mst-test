@@ -1,4 +1,4 @@
-const Barang = require('../models').Barang
+const Barang = require('../models/barang')
 
 module.exports = {
     async getAllBarang(req, res) {
