@@ -1,5 +1,4 @@
 const Barang = require('../models/barang')
-// const dbpg = require('../db/index')
 
 module.exports = {
     async getAllBarang(req, res) {
