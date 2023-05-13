@@ -4,6 +4,8 @@ const path = require('path');
 const dotenv = require('dotenv');
 const db = require('./config/db.config.js');
 
+var indexRouter = require('./routes/index');
+
 var cors = require('cors')
 var allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', "*");
@@ -12,10 +14,6 @@ var allowCrossDomain = function(req, res, next) {
   
   next();
 }
-
-
-
-
 dotenv.config();
 
 db.authenticate()
@@ -24,9 +22,9 @@ db.authenticate()
 
 const app = express();
 
-app.get('/', (req, res) => res.send('running...'));
-
-app.use('/list', require('./routes/list'));
+// app.get('/', (req, res) => res.send('running...'));
+app.use('/', indexRouter);
+// app.use('/list', require('./routes/list'));
 app.use(cors());
 app.options("*", cors());
 app.use(allowCrossDomain);

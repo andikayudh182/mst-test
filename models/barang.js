@@ -19,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     harga: DataTypes.DECIMAL
   }, {
     sequelize,
+    timestamps:false,
+    freezeTableName:true,
     modelName: 'Barang',
   });
   return Barang;
