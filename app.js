@@ -28,6 +28,7 @@ app.get('/', (req, res) => res.send('running...'));
 
 app.use('/list', require('./routes/list'));
 app.use(cors());
+app.options("*", cors());
 app.use(allowCrossDomain);
 
 const PORT = process.env.PORT || 5000;
