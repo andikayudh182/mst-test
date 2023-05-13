@@ -27,6 +27,7 @@ const app = express();
 app.use('/', indexRouter);
 // app.use('/list', require('./routes/list'));
 app.use(cors());
+app.use(express.bodyParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
