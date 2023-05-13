@@ -19,7 +19,7 @@ module.exports = {
             }
 
             return res.status(200).send({
-                message:'Get all data mahasiswa berhasil',
+                message:'Get all data barang berhasil',
                 data: barang
             })
         } catch (error) {
@@ -27,5 +27,30 @@ module.exports = {
                 message: error.message
             })
         }
+    },
+
+    async addBarang(req, res) {
+        const data = req.body
+        const options = {
+            fields:['kode','nama','harga'],
+            returning:true
+        }
+
+        try {
+            const barang = await Barang.create(data,options)
+            
+            if (barang) {
+                return res.status(200).send({
+                    message:'add barang berhasil',
+                    data: barang
+                })
+            }
+        } catch (error) {
+            return res.status(400).send({
+                message:error.message
+            })
+        }
+        
+
     }
 }

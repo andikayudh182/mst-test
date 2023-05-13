@@ -31,7 +31,8 @@ const db = require('../config/db.config.js');
 
 const Barang = db.define('m_barang', {
   kode: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    unique:true
   },
   nama: {
     type: Sequelize.STRING
