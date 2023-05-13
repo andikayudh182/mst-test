@@ -4,6 +4,16 @@ const path = require('path');
 const dotenv = require('dotenv');
 const db = require('./config/db.config.js');
 
+var cors = require('cors')
+var allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  
+  next();
+}
+
+
 
 
 dotenv.config();
@@ -17,7 +27,8 @@ const app = express();
 app.get('/', (req, res) => res.send('running...'));
 
 app.use('/list', require('./routes/list'));
-
+app.use(cors());
+app.use(allowCrossDomain);
 
 const PORT = process.env.PORT || 5000;
 
