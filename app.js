@@ -1,18 +1,9 @@
-const express = require('express');
+onst express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const dotenv = require('dotenv');
 const db = require('./config/db.config.js');
-
-var cors = require('cors')
-var allowCrossDomain = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', "*");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers: Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization');
-  
-  next();
-}
-
+const cors_proxy = require('cors-anywhere');
 
 dotenv.config();
 
@@ -25,10 +16,16 @@ const app = express();
 app.get('/', (req, res) => res.send('running...'));
 
 app.use('/list', require('./routes/list'));
-app.use(cors());
-app.options("*", cors());
-app.use(allowCrossDomain);
+
+// Activate CORS proxy using cors-anywhere
+cors_proxy.createServer({
+  originWhitelist: [], // Allow all origins
+  requireHeader: ['origin', 'x-requested-with'],
+  removeHeaders: ['cookie', 'cookie2']
+}).listen(process.env.PORT || 8080, () => {
+  console.log(`CORS proxy running on port ${process.env.PORT || 8080}`);
+});
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, console.log(`app running on ${PORT}`))
+app.listen(PORT, console.log(`app running on port ${PORT}`));
