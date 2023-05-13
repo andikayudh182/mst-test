@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 const path = require('path');
 const dotenv = require('dotenv');
 const db = require('./config/db.config.js');
@@ -26,8 +26,9 @@ const app = express();
 app.use('/', indexRouter);
 // app.use('/list', require('./routes/list'));
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.options("*", cors());
 app.use(allowCrossDomain);
 
