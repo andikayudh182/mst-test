@@ -39,6 +39,8 @@ const Barang = db.define('m_barang', {
   harga: {
     type: Sequelize.DECIMAL(10,2)
   },
+},{
+  freezeTableName: true
 })
 
 module.exports = Barang;

@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
     const barang = await Barang.findAll()
     res.status(200).send({
       message:'success',
-      data:list
+      data:barang
     })
   } catch(e){
     res.send
